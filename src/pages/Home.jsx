@@ -7,26 +7,23 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white flex flex-col">
       {/* Navbar */}
-     <nav className="flex justify-between items-center px-6 md:px-12 py-5 border-b border-white/10 backdrop-blur-md">
-  <Link to="/" className="flex items-center">
-    <img
-      src={logo}
-      alt="Linkviq logo"
-      className="h-16 md:h-20 w-auto object-contain"
-    />
-  </Link>
+      <nav className="flex justify-between items-center px-6 md:px-12 py-4 border-b border-white/10 backdrop-blur-md">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center font-bold">
+            L
+          </div>
+          <h1 className="text-lg font-semibold">Linkviq</h1>
+        </div>
 
-  <div className="hidden md:flex gap-6 text-slate-300 text-sm font-medium">
-    <Link to="/auth/login" className="hover:text-white transition">
-      Sign In
-    </Link>
-    <Link to="/auth/register" className="hover:text-white transition">
-      Sign Up
-    </Link>
-  </div>
-</nav>
-
-
+        <div className="hidden md:flex gap-6 text-slate-300 text-sm font-medium">
+          <Link to="/auth/login" className="hover:text-white transition">
+            Sign In
+          </Link>
+          <Link to="/auth/register" className="hover:text-white transition">
+            Sign Up
+          </Link>
+        </div>
+      </nav>
 
       {/* Hero */}
       <section className="flex flex-col md:flex-row items-center justify-center px-6 md:px-12 py-20 gap-12">

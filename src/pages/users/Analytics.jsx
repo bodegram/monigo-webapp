@@ -3,7 +3,7 @@ import {
   ChartBarIcon,
   ArrowTrendingUpIcon,
   UserGroupIcon,
-  CurrencyDollarIcon,
+  CheckBadgeIcon,
 } from "@heroicons/react/24/outline";
 import {
   LineChart,
@@ -16,84 +16,97 @@ import {
 } from "recharts";
 
 export default function Analytics() {
-  // Sample traffic data
-  const trafficData = [
-    { day: "Mon", visitors: 1200 },
-    { day: "Tue", visitors: 2100 },
-    { day: "Wed", visitors: 800 },
-    { day: "Thu", visitors: 1600 },
-    { day: "Fri", visitors: 900 },
-    { day: "Sat", visitors: 1700 },
-    { day: "Sun", visitors: 2200 },
+  /* ================================
+     Prediction Activity Data
+     ================================ */
+  const predictionActivityData = [
+    { day: "Mon", predictions: 120 },
+    { day: "Tue", predictions: 210 },
+    { day: "Wed", predictions: 98 },
+    { day: "Thu", predictions: 165 },
+    { day: "Fri", predictions: 142 },
+    { day: "Sat", predictions: 190 },
+    { day: "Sun", predictions: 240 },
   ];
 
   return (
     <div className="space-y-8">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+      {/* ================= Header ================= */}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h1 className="text-2xl md:text-3xl font-semibold text-white">
-            Analytics Overview 📈
+            Analytics Overview 📊
           </h1>
           <p className="text-gray-400 text-sm">
-            Track performance, traffic, and growth insights.
+            Platform-wide insights into prediction quality, activity, and growth.
           </p>
         </div>
 
-        <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium shadow-md">
+        <button className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-medium shadow-md">
           Export Report
         </button>
       </div>
 
-      {/* Summary Stats */}
+      {/* ================= Summary Metrics ================= */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {/* Active Predictors */}
         <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10">
-          <UserGroupIcon className="h-6 w-6 text-blue-400 mb-2" />
-          <h3 className="text-gray-300 text-sm">New Users</h3>
-          <p className="text-xl font-semibold text-white mt-1">245</p>
-          <span className="text-green-400 text-xs">+12% this week</span>
+          <UserGroupIcon className="h-6 w-6 text-indigo-400 mb-2" />
+          <h3 className="text-gray-300 text-sm">Active Predictors</h3>
+          <p className="text-xl font-semibold text-white mt-1">1,248</p>
+          <span className="text-green-400 text-xs">+9% this week</span>
         </div>
 
+        {/* Predictions Created */}
         <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10">
-          <CurrencyDollarIcon className="h-6 w-6 text-green-400 mb-2" />
-          <h3 className="text-gray-300 text-sm">Revenue</h3>
-          <p className="text-xl font-semibold text-white mt-1">$5,640</p>
-          <span className="text-green-400 text-xs">+8.5% this week</span>
+          <ChartBarIcon className="h-6 w-6 text-blue-400 mb-2" />
+          <h3 className="text-gray-300 text-sm">Predictions Created</h3>
+          <p className="text-xl font-semibold text-white mt-1">8,430</p>
+          <span className="text-green-400 text-xs">+14% this week</span>
         </div>
 
+        {/* Average Accuracy */}
         <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10">
-          <ChartBarIcon className="h-6 w-6 text-purple-400 mb-2" />
-          <h3 className="text-gray-300 text-sm">Engagement</h3>
-          <p className="text-xl font-semibold text-white mt-1">72%</p>
-          <span className="text-red-400 text-xs">-3% this week</span>
+          <CheckBadgeIcon className="h-6 w-6 text-green-400 mb-2" />
+          <h3 className="text-gray-300 text-sm">Average Accuracy</h3>
+          <p className="text-xl font-semibold text-white mt-1">68.4%</p>
+          <span className="text-green-400 text-xs">+2.1% this week</span>
         </div>
 
+        {/* Resolution Rate */}
         <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10">
           <ArrowTrendingUpIcon className="h-6 w-6 text-orange-400 mb-2" />
-          <h3 className="text-gray-300 text-sm">Conversion Rate</h3>
-          <p className="text-xl font-semibold text-white mt-1">4.3%</p>
-          <span className="text-green-400 text-xs">+1.2% this week</span>
+          <h3 className="text-gray-300 text-sm">Resolution Rate</h3>
+          <p className="text-xl font-semibold text-white mt-1">91%</p>
+          <span className="text-gray-400 text-xs">Stable</span>
         </div>
       </div>
 
-      {/* Traffic Chart */}
+      {/* ================= Prediction Activity Chart ================= */}
       <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-md">
-        <h2 className="text-lg font-semibold text-white mb-4">Traffic Overview</h2>
+        <h2 className="text-lg font-semibold text-white mb-4">
+          Prediction Activity (Last 7 Days)
+        </h2>
+
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={trafficData}>
-              <CartesianGrid stroke="#444" strokeDasharray="3 3" />
-              <XAxis dataKey="day" stroke="#aaa" />
-              <YAxis stroke="#aaa" />
+            <LineChart data={predictionActivityData}>
+              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
+              <XAxis dataKey="day" stroke="#94a3b8" />
+              <YAxis stroke="#94a3b8" />
               <Tooltip
-                contentStyle={{ backgroundColor: "#1e293b", borderRadius: "8px" }}
+                contentStyle={{
+                  backgroundColor: "#0f172a",
+                  borderRadius: "8px",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                }}
                 labelStyle={{ color: "#fff" }}
-                itemStyle={{ color: "#fff" }}
+                itemStyle={{ color: "#c7d2fe" }}
               />
               <Line
                 type="monotone"
-                dataKey="visitors"
-                stroke="#3b82f6"
+                dataKey="predictions"
+                stroke="#6366f1"
                 strokeWidth={3}
                 activeDot={{ r: 6 }}
               />
@@ -102,44 +115,45 @@ export default function Analytics() {
         </div>
       </div>
 
-      {/* Top Metrics Table */}
+      {/* ================= Category Performance ================= */}
       <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-md">
         <h2 className="text-lg font-semibold text-white mb-4">
-          Top Performing Pages
+          Top Prediction Categories
         </h2>
+
         <table className="w-full text-sm text-gray-300">
           <thead>
             <tr className="text-gray-400 border-b border-white/10">
-              <th className="text-left py-2">Page</th>
-              <th className="text-right py-2">Views</th>
-              <th className="text-right py-2">Clicks</th>
-              <th className="text-right py-2">CTR</th>
+              <th className="text-left py-2">Category</th>
+              <th className="text-right py-2">Predictions</th>
+              <th className="text-right py-2">Avg Accuracy</th>
+              <th className="text-right py-2">Resolution</th>
             </tr>
           </thead>
           <tbody>
             <tr className="border-b border-white/10">
-              <td className="py-3">/home</td>
-              <td className="text-right">12,340</td>
-              <td className="text-right">5,230</td>
-              <td className="text-right text-green-400">42.4%</td>
+              <td className="py-3">Crypto Markets</td>
+              <td className="text-right">2,430</td>
+              <td className="text-right text-green-400">71%</td>
+              <td className="text-right">94%</td>
             </tr>
             <tr className="border-b border-white/10">
-              <td className="py-3">/products</td>
-              <td className="text-right">9,876</td>
-              <td className="text-right">3,512</td>
-              <td className="text-right text-green-400">35.6%</td>
+              <td className="py-3">Sports</td>
+              <td className="text-right">1,980</td>
+              <td className="text-right text-green-400">66%</td>
+              <td className="text-right">92%</td>
             </tr>
             <tr className="border-b border-white/10">
-              <td className="py-3">/pricing</td>
-              <td className="text-right">7,431</td>
-              <td className="text-right">2,654</td>
-              <td className="text-right text-green-400">30.8%</td>
+              <td className="py-3">Politics</td>
+              <td className="text-right">1,120</td>
+              <td className="text-right text-yellow-400">61%</td>
+              <td className="text-right">88%</td>
             </tr>
             <tr>
-              <td className="py-3">/about</td>
-              <td className="text-right">5,220</td>
-              <td className="text-right">1,120</td>
-              <td className="text-right text-green-400">21.4%</td>
+              <td className="py-3">Technology</td>
+              <td className="text-right">840</td>
+              <td className="text-right text-green-400">69%</td>
+              <td className="text-right">90%</td>
             </tr>
           </tbody>
         </table>

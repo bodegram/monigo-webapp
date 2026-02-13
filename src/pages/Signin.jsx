@@ -2,11 +2,12 @@ import { useFormik } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
 import siginSchema from "../schemas/signin";
-import { useAuth } from "../contexts/AuthContext";
 import { BarsLoader } from "../components/BarsLoader";
+import { useSelector } from "react-redux";
+import { loginAsync } from "../redux/slices/userSlice";
 
 export default function Signin() {
-    const { login, authLoading } = useAuth()
+    const { loading } = useSelector(state => state.user)
     const { values, handleChange, handleSubmit, touched, errors } = useFormik({
         initialValues: {
             email: "",
@@ -14,7 +15,12 @@ export default function Signin() {
         },
         validationSchema: siginSchema,
         onSubmit: (values, action) => {
-            login(values.email, values.password)
+            const payload = {
+                email: values.email,
+                password: values.password
+            }
+
+            loginAsync(payload)
         }
     })
     return (
@@ -79,7 +85,7 @@ export default function Signin() {
                         type="submit"
                         className="w-full bg-indigo-600 hover:bg-indigo-500 transition-colors py-4 rounded-lg font-semibold shadow-lg"
                     >
-                        {authLoading ? <BarsLoader/> : 'Sign In'}
+                        {loading ? <BarsLoader /> : 'Sign In'}
                     </button>
                 </form>
 

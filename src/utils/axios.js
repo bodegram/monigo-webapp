@@ -1,8 +1,8 @@
 import Axios from 'axios'
 
-const baseURL = 'http://127.0.01:5001'
+const baseURL = 'http://127.0.0.1:5001'
 
-const api = Axios.create({
+const axios = Axios.create({
     baseURL,
     headers:{
         'Content-Type': 'application/json',
@@ -10,4 +10,4 @@ const api = Axios.create({
     }
 })
 
-export default api
+export default axios

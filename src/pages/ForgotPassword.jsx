@@ -1,18 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
 import { useFormik } from "formik";
 import forgotPasswordSchema from "../schemas/forgotPassword";
 
 export default function ForgotPassword() {
-    const { resetPassword, authLoading } = useAuth()
     const { values, handleChange, handleSubmit, touched, errors } = useFormik({
         initialValues: {
             email: "",
         },
         validationSchema: forgotPasswordSchema,
         onSubmit: (values, action) => {
-            resetPassword(values.email)
         }
     })
     return (

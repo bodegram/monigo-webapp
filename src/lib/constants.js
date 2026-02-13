@@ -1,0 +1,41 @@
+// AUTH
+const LOGIN_ENDPOINT = '/auth/login'
+const REGISTER_ENDPOINT = '/auth/register'
+const RESETPASSWORD_ENDPOINT = '/auth/reset-password'
+const FORGOTPASSWORD_ENDPOINT = '/auth/forgot-password'
+
+// USER
+const PROFILE_ENDPOINT = '/user/profile'
+const UPDATEPROFILE_ENDPOINT = '/user/update-profile'
+const UPDATEPASSWORD_ENDPOINT = '/user/update-password'
+
+// ANALYTICS
+const RECENTACTIVITIES_ENDPOINT = '/analytics/recent-activities'
+
+// PREDICTIONS
+const PREDICTIONS_ENDPOINT = '/predictions'
+const NEWPREDICTION_ENDPOINT = '/predictions'
+const TOPPREDICTIONS_ENDPOINT = '/predictions/category/top'
+const PREDICTION_ENDPOINT = '/predictions'
+
+// PAYMENT AND TRANSACTIONS
+const WITHDRAWAL_ENDPOINT = '/payment/withdrawal'
+const ADDBANK_ENDPOINT = '/payment/add-bank'
+
+
+export {
+    LOGIN_ENDPOINT,
+    REGISTER_ENDPOINT,
+    RESETPASSWORD_ENDPOINT,
+    FORGOTPASSWORD_ENDPOINT,
+    PROFILE_ENDPOINT,
+    UPDATEPASSWORD_ENDPOINT,
+    UPDATEPROFILE_ENDPOINT,
+    RECENTACTIVITIES_ENDPOINT,
+    PREDICTIONS_ENDPOINT,
+    PREDICTION_ENDPOINT,
+    NEWPREDICTION_ENDPOINT,
+    TOPPREDICTIONS_ENDPOINT,
+    WITHDRAWAL_ENDPOINT,
+    ADDBANK_ENDPOINT
+}

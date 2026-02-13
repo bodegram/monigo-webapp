@@ -10,15 +10,20 @@ import Profile from './pages/users/Profile';
 import Settings from './pages/users/Settings';
 import Assets from './pages/users/Assets';
 import { AppProvider } from './contexts/AppContext';
-import { AuthProvider } from './contexts/AuthContext';
-import { DataProvider } from './contexts/DataContext';
 import NotFound from './pages/NotFound';
+import ResetPassword from './pages/ResetPassword';
+import Predictions from './pages/users/Assets';
+import { PersistGate } from 'redux-persist/integration/react'
+import { Provider } from 'react-redux';
+import { persistor, store } from './redux/store';
+
 
 function App() {
+
   return (
-    <AppProvider>
-      <AuthProvider>
-        <DataProvider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <AppProvider>
           <BrowserRouter>
             <Routes>
               {/* Public Routes */}
@@ -26,21 +31,24 @@ function App() {
               <Route path="/auth/login" element={<Signin />} />
               <Route path="/auth/register" element={<Signup />} />
               <Route path="/auth/forgot-password" element={<ForgotPassword />} />
+              <Route path="/auth/reset-password" element={<ResetPassword />} />
+
               <Route path="*" element={<NotFound />} />
 
               {/* Protected/User Dashboard Routes */}
               <Route element={<DashboardLayout />}>
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/app" element={<Dashboard />} />
                 <Route path="/analytics" element={<Analytics />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/settings" element={<Settings />} />
-                <Route path="/assets" element={<Assets />} />
+                <Route path="/predictions" element={<Predictions />} />
               </Route>
             </Routes>
           </BrowserRouter>
-        </DataProvider>
-      </AuthProvider>
-    </AppProvider>
+        </AppProvider>
+      </PersistGate>
+    </Provider>
+
   );
 }
 

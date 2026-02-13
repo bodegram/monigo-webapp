@@ -1,12 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
 import { useFormik } from "formik";
 import signupSchema from "../schemas/signup";
 import { BarsLoader } from "../components/BarsLoader";
+import { useSelector } from "react-redux";
+import countries from "../data/countries";
+import { toast } from "sonner";
+import { registerAsync } from "../redux/slices/userSlice";
 
 export default function Signup() {
-    const { register, authLoading } = useAuth()
+    const { loading, errorMessage, error } = useSelector(state => state.user)
+
     const { values, handleChange, handleSubmit, touched, errors } = useFormik({
         initialValues: {
             email: "",
@@ -18,7 +22,7 @@ export default function Signup() {
             cpassword: ""
         },
         validationSchema: signupSchema,
-        onSubmit: (values, action) => {
+        onSubmit: async (values, action) => {
             const payload = {
                 firstname: values.firstname,
                 lastname: values.lastname,
@@ -28,7 +32,12 @@ export default function Signup() {
                 phone: values.phone,
                 cpassword: values.cpassword
             }
-            register(payload)
+
+            if (values.cpassword !== values.password) {
+                toast.error('Password does not match')
+            }
+
+            await registerAsync(payload)
         }
     })
     return (
@@ -118,13 +127,19 @@ export default function Signup() {
                         <label className="block text-sm font-medium text-slate-200 mb-1">
                             Country
                         </label>
-                        <input
-                            type="text"
-                            placeholder="Nigeria"
+
+                        <select name="" id=""
                             className="w-full px-4 py-2 bg-white/10 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-slate-400"
                             value={values.country}
                             onChange={handleChange('country')}
-                        />
+                        >
+                            <option value=""></option>
+                            {
+                                countries.map((country, index) => (
+                                    <option value={country.name}>{country.name}</option>
+                                ))
+                            }
+                        </select>
                         {
                             touched.country && errors.country && (
                                 <div className="text-red-500 mt-1">{errors.country}</div>
@@ -172,7 +187,7 @@ export default function Signup() {
                         type="submit"
                         className="w-full bg-indigo-600 hover:bg-indigo-500 transition-colors py-2 rounded-lg font-semibold shadow-lg"
                     >
-                        {authLoading ? <BarsLoader /> : 'Create Account'}
+                        {loading ? <BarsLoader /> : 'Create Account'}
                     </button>
                 </form>
 

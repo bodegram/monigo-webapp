@@ -16,6 +16,7 @@ import Predictions from './pages/users/Assets';
 import { PersistGate } from 'redux-persist/integration/react'
 import { Provider } from 'react-redux';
 import { persistor, store } from './redux/store';
+import './App.css'
 
 
 function App() {
